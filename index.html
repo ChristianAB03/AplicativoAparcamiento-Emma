@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="Imagenes/16.png">
+    <link href="index.css" rel="stylesheet">
+    <title>emma</title>
+</head>
+<body>
+
+<div class="login-container">
+    <img src="Imagenes/logo emma.png" alt="Imagen de ejemplo" class="example-image"> <!-- Reemplaza la ruta -->
+    <h2>Iniciar Sesión</h2>
+    <form id="loginForm">
+        <input type="text" id="usuario" placeholder="Usuario o Correo" required>
+        <input type="password" id="contrasena" placeholder="Contraseña" required>
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+    <p id="mensaje" style="color: red;"></p>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', () => {
+    fetch('info.json')
+        .then(response => response.json())
+        .then(datosUsuario => {
+            document.getElementById('loginForm').addEventListener('submit', function(event) {
+                event.preventDefault();
+
+                const usuarioInput = document.getElementById('usuario').value;
+                const contrasenaInput = document.getElementById('contrasena').value;
+
+                // Validación
+                const usuarioAutenticado = datosUsuario.find(usuario => 
+                    (usuarioInput === usuario.usuario || usuarioInput === usuario.correo) && 
+                    contrasenaInput === usuario.contrasena
+                );
+
+                if (usuarioAutenticado) {
+                    // Almacenar el usuario autenticado en localStorage
+                    localStorage.setItem('usuarioAutenticado', JSON.stringify(usuarioAutenticado));
+
+                    // Redirigir a parqueadero.html
+                    window.location.href = 'indexEMMA.html';
+                } else {
+                    document.getElementById('mensaje').innerText = 'Usuario o contraseña incorrectos.';
+                }
+            });
+        })
+        .catch(error => {
+            console.error('Error al cargar el archivo JSON:', error);
+        });
+    });
+</script>
+
+</body>
+</html>

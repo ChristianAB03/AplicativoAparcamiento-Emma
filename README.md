@@ -1,3 +1,4 @@
+En caso de que no sepan usar GitHub:
 # Sistema de Gestión de Aparcamiento - Proyecto Web
 
 ## Descripción General
@@ -60,3 +61,5 @@ Crear un sistema funcional y adaptable que permita a los usuarios:
               ├── Ver todos los espacios
               ├── Reservar espacio
               └── Eliminar reserva
+
+
